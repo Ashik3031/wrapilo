@@ -1,0 +1,238 @@
+2026-02-05T18:48:05.334Z - PUT - Updating 6984e01793d495133731ea18
+{
+  "name": "Promise day",
+  "slug": "promise-day",
+  "description": "promise day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:48:05.445Z - PUT - Updated result 6984e01793d495133731ea18
+{
+  "_id": "6984e01793d495133731ea18",
+  "name": "Promise day",
+  "slug": "promise-day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "description": "promise day",
+  "createdAt": "2026-02-05T18:23:19.350Z",
+  "updatedAt": "2026-02-05T18:48:05.336Z",
+  "__v": 0
+}
+
+2026-02-05T18:49:12.603Z - PUT - Updating 6984e01793d495133731ea18
+{
+  "name": "Promise day",
+  "slug": "promise-day",
+  "description": "promise day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:49:12.676Z - PUT - Updated result 6984e01793d495133731ea18
+{
+  "_id": "6984e01793d495133731ea18",
+  "name": "Promise day",
+  "slug": "promise-day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "description": "promise day",
+  "createdAt": "2026-02-05T18:23:19.350Z",
+  "updatedAt": "2026-02-05T18:49:12.604Z",
+  "__v": 0
+}
+
+2026-02-05T18:49:35.978Z - PUT - Updating 6984e01793d495133731ea18
+{
+  "name": "Promise day",
+  "slug": "promise-day",
+  "description": "promise day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:49:36.305Z - PUT - Updated result 6984e01793d495133731ea18
+{
+  "_id": "6984e01793d495133731ea18",
+  "name": "Promise day",
+  "slug": "promise-day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "description": "promise day",
+  "createdAt": "2026-02-05T18:23:19.350Z",
+  "updatedAt": "2026-02-05T18:49:35.979Z",
+  "__v": 0
+}
+
+2026-02-05T18:51:51.826Z - PUT - Updating 6984e01793d495133731ea18
+{
+  "name": "Promise day",
+  "slug": "promise-day",
+  "description": "promise day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:51:51.828Z - PUT - Schema Paths
+[
+  "name",
+  "slug",
+  "image",
+  "description",
+  "parent",
+  "_id",
+  "createdAt",
+  "updatedAt",
+  "__v"
+]
+
+2026-02-05T18:51:51.903Z - PUT - Updated result 6984e01793d495133731ea18
+{
+  "_id": "6984e01793d495133731ea18",
+  "name": "Promise day",
+  "slug": "promise-day",
+  "image": "/uploads/1770315797533-Gemini_Generated_Image_cj0edncj0edncj0e.png",
+  "description": "promise day",
+  "createdAt": "2026-02-05T18:23:19.350Z",
+  "updatedAt": "2026-02-05T18:51:51.829Z",
+  "__v": 0,
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:05.180Z - PUT - Updating 6984df0193d495133731ea14
+{
+  "name": "Teddy day",
+  "slug": "teddy-day",
+  "description": "this is a teddy day",
+  "image": "/uploads/1770315519741-3535580_529905-PJAUHN-339.jpg",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:05.181Z - PUT - Schema Paths
+[
+  "name",
+  "slug",
+  "image",
+  "description",
+  "parent",
+  "_id",
+  "createdAt",
+  "updatedAt",
+  "__v"
+]
+
+2026-02-05T18:52:05.499Z - PUT - Updated result 6984df0193d495133731ea14
+{
+  "_id": "6984df0193d495133731ea14",
+  "name": "Teddy day",
+  "slug": "teddy-day",
+  "image": "/uploads/1770315519741-3535580_529905-PJAUHN-339.jpg",
+  "description": "this is a teddy day",
+  "createdAt": "2026-02-05T18:18:41.376Z",
+  "updatedAt": "2026-02-05T18:52:05.182Z",
+  "__v": 0,
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:29.840Z - PUT - Updating 6984de7993d495133731ea10
+{
+  "name": "Chocolate day",
+  "slug": "chocolate-day",
+  "description": "valentine day",
+  "image": "/uploads/1770315382434-27420234_7345172.jpg",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:29.842Z - PUT - Schema Paths
+[
+  "name",
+  "slug",
+  "image",
+  "description",
+  "parent",
+  "_id",
+  "createdAt",
+  "updatedAt",
+  "__v"
+]
+
+2026-02-05T18:52:29.927Z - PUT - Updated result 6984de7993d495133731ea10
+{
+  "_id": "6984de7993d495133731ea10",
+  "name": "Chocolate day",
+  "slug": "chocolate-day",
+  "image": "/uploads/1770315382434-27420234_7345172.jpg",
+  "description": "valentine day",
+  "createdAt": "2026-02-05T18:16:25.346Z",
+  "updatedAt": "2026-02-05T18:52:29.844Z",
+  "__v": 0,
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:39.309Z - PUT - Updating 6984ddec93d495133731ea0c
+{
+  "name": "Propose day",
+  "slug": "propose-day",
+  "description": "propose day",
+  "image": "/uploads/1770315242246-2151164261.jpg",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:39.310Z - PUT - Schema Paths
+[
+  "name",
+  "slug",
+  "image",
+  "description",
+  "parent",
+  "_id",
+  "createdAt",
+  "updatedAt",
+  "__v"
+]
+
+2026-02-05T18:52:39.642Z - PUT - Updated result 6984ddec93d495133731ea0c
+{
+  "_id": "6984ddec93d495133731ea0c",
+  "name": "Propose day",
+  "slug": "propose-day",
+  "image": "/uploads/1770315242246-2151164261.jpg",
+  "description": "propose day",
+  "createdAt": "2026-02-05T18:14:04.637Z",
+  "updatedAt": "2026-02-05T18:52:39.311Z",
+  "__v": 0,
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:52.743Z - PUT - Updating 6984dce693d495133731e9ff
+{
+  "name": "Rose Day",
+  "slug": "rose-day",
+  "description": "Rose day",
+  "image": "/uploads/1770314973756-36025853_8395584.jpg",
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+
+2026-02-05T18:52:52.744Z - PUT - Schema Paths
+[
+  "name",
+  "slug",
+  "image",
+  "description",
+  "parent",
+  "_id",
+  "createdAt",
+  "updatedAt",
+  "__v"
+]
+
+2026-02-05T18:52:52.825Z - PUT - Updated result 6984dce693d495133731e9ff
+{
+  "_id": "6984dce693d495133731e9ff",
+  "name": "Rose Day",
+  "slug": "rose-day",
+  "image": "/uploads/1770314973756-36025853_8395584.jpg",
+  "description": "Rose day",
+  "createdAt": "2026-02-05T18:09:42.581Z",
+  "updatedAt": "2026-02-05T18:52:52.745Z",
+  "__v": 0,
+  "parent": "6982c127a57e0a7ea1e7d823"
+}
+

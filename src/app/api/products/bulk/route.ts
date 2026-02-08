@@ -30,7 +30,7 @@ export async function POST(request: Request) {
             const productData = {
                 ...p,
                 images: p.images.length > 0 ? p.images : ['https://placehold.co/600x600?text=Product'],
-                category: category._id,
+                categories: [category._id],
                 slug: p.slug || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
             };
 

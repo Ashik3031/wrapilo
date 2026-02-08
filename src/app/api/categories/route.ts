@@ -13,8 +13,24 @@ function logToDisk(message: string, data: any) {
 export async function GET() {
     await connectToDatabase();
     try {
-        const categories = await Category.find({});
-        return NextResponse.json({ success: true, data: categories });
+        const Category = (await import('@/lib/models/Category')).default;
+        const Product = (await import('@/lib/models/Product')).default;
+
+        const categories = await Category.find({}).lean();
+
+        // Fetch product counts for each category
+        const categoriesWithCounts = await Promise.all(categories.map(async (cat: any) => {
+            const count = await Product.countDocuments({
+                categories: cat._id
+            });
+            return {
+                ...cat,
+                _id: cat._id.toString(), // Explicitly stringify ID
+                productCount: count
+            };
+        }));
+
+        return NextResponse.json({ success: true, data: categoriesWithCounts });
     } catch (error) {
         console.error('Error fetching categories:', error);
         return NextResponse.json({ success: false, error: (error as Error).message }, { status: 400 });

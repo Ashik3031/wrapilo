@@ -10,7 +10,7 @@ export async function GET(
     await connectToDatabase();
 
     try {
-        const product = await Product.findById(id).populate('category');
+        const product = await Product.findById(id).populate('categories');
         if (!product) {
             return NextResponse.json({ success: false }, { status: 404 });
         }

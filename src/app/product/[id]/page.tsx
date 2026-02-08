@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useCurrency } from '@/context/CurrencyContext';
-import { Phone, Clock, Calendar, Check, Star, Loader2, Heart } from 'lucide-react';
+import { Phone, Clock, Calendar, Check, Star, Loader2, Heart, ShoppingBag } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useWishlist } from '@/context/WishlistContext';
+import { useCart } from '@/context/CartContext';
 
 interface Product {
     _id: string;
@@ -13,7 +14,7 @@ interface Product {
     price: number;
     description: string;
     images: string[];
-    category: any;
+    categories: any[];
     rating?: number;
     reviews?: number;
     slug?: string;
@@ -27,10 +28,9 @@ export default function ProductPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+    const { addToCart } = useCart();
 
-    // Enquiry State
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
+
 
     useEffect(() => {
         if (!id) return;
@@ -56,22 +56,15 @@ export default function ProductPage() {
     const handleEnquiry = () => {
         if (!product) return;
 
-        if (!date || !time) {
-            alert('Please select a preferred date and time for delivery/viewing.');
-            return;
-        }
-
         const message = `Hi, I'm interested in the ${product.name}.
     
 Price: ${formatPrice(product.price)}
-Preferred Date: ${date}
-Preferred Time: ${time}
 Currency: ${currency}
 
 Can you please provide more details?`;
 
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/971123456789?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/971544692469?text=${encodedMessage}`, '_blank');
     };
 
     if (loading) {
@@ -92,7 +85,9 @@ Can you please provide more details?`;
     }
 
     const images = product.images && product.images.length > 0 ? product.images : ['/placeholder.jpg'];
-    const categoryName = typeof product.category === 'object' ? product.category?.name : 'Product';
+    const categoryName = Array.isArray(product.categories) && product.categories.length > 0
+        ? (typeof product.categories[0] === 'object' ? product.categories[0].name : 'Product')
+        : 'Product';
 
     return (
         <div className="container mx-auto px-4 md:px-8 py-12 mt-[80px]">
@@ -178,45 +173,35 @@ Can you please provide more details?`;
                         {product.description}
                     </div>
 
-                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 space-y-6">
-                        <h3 className="font-semibold text-gray-900">Enquire Availability</h3>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                                    <Calendar size={16} /> Preferred Date
-                                </label>
-                                <input
-                                    type="date"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-black focus:ring-0 transition-colors bg-white text-sm outline-none"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-                                    <Clock size={16} /> Preferred Time
-                                </label>
-                                <input
-                                    type="time"
-                                    value={time}
-                                    onChange={(e) => setTime(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-black focus:ring-0 transition-colors bg-white text-sm outline-none"
-                                />
-                            </div>
-                        </div>
+                    <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 space-y-4">
+                        <button
+                            onClick={() => {
+                                addToCart({
+                                    id: product._id,
+                                    name: product.name,
+                                    price: product.price,
+                                    image: images[0],
+                                    quantity: 1,
+                                    slug: product.slug || '',
+                                    category: categoryName
+                                });
+                            }}
+                            className="w-full bg-black hover:bg-gray-800 text-white py-4 rounded-lg font-bold flex items-center justify-center gap-3 transition-colors shadow-sm hover:shadow-md"
+                        >
+                            <ShoppingBag size={20} />
+                            Add to Cart
+                        </button>
 
                         <button
                             onClick={handleEnquiry}
                             className="w-full bg-[#25D366] hover:bg-[#20b858] text-white py-4 rounded-lg font-bold flex items-center justify-center gap-3 transition-colors shadow-sm hover:shadow-md"
                         >
                             <Phone size={20} />
-                            Enquire via WhatsApp
+                            Shop on WhatsApp
                         </button>
 
                         <p className="text-xs text-center text-gray-400">
-                            No payment required. Chat with us to confirm details.
+                            Secure checkout with Cash on Delivery available.
                         </p>
                     </div>
 

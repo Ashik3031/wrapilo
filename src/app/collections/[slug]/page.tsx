@@ -10,7 +10,7 @@ interface Product {
     name: string;
     price: number;
     images: string[];
-    category: any;
+    categories: any[];
     slug: string;
 }
 
@@ -103,7 +103,7 @@ export default function CollectionPage() {
                             name={product.name}
                             price={product.price}
                             images={product.images}
-                            category={typeof product.category === 'object' ? product.category.name : ''}
+                            category={Array.isArray(product.categories) && product.categories.length > 0 ? (typeof product.categories[0] === 'object' ? product.categories[0].name : '') : ''}
                             slug={product.slug}
                         />
                     ))}

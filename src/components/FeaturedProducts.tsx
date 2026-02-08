@@ -58,7 +58,15 @@ export default function FeaturedProducts() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10">
                     {products.map((product: any) => (
-                        <ProductCard key={product._id} {...product} id={product._id} />
+                        <ProductCard
+                            key={product._id}
+                            id={product._id}
+                            name={product.name}
+                            price={product.price}
+                            images={product.images}
+                            category={Array.isArray(product.categories) && product.categories.length > 0 ? (typeof product.categories[0] === 'object' ? product.categories[0].name : '') : ''}
+                            slug={product.slug}
+                        />
                     ))}
                 </div>
             </div>

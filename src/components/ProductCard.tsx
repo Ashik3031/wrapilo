@@ -36,7 +36,7 @@ export default function ProductCard({ id, name, price, image, images, category, 
 
     return (
         <div className="group block relative">
-            <Link href={`/product/${id}`}>
+            <Link href={`/product/${id}`} className="block">
                 <div className="relative overflow-hidden rounded-md bg-gray-100 aspect-square mb-4">
                     {/* Image with hover zoom */}
                     <div
@@ -46,14 +46,24 @@ export default function ProductCard({ id, name, price, image, images, category, 
 
                     {/* Quick Add / View button (optional overlay) */}
                     <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="w-full bg-white/90 backdrop-blur text-black py-2 rounded-full text-sm font-medium shadow-sm hover:bg-white transition-colors">
+                        <div className="w-full bg-white/90 backdrop-blur text-black py-2 rounded-full text-sm font-medium shadow-sm hover:bg-white transition-colors text-center">
                             View Details
-                        </button>
+                        </div>
                     </div>
+                </div>
+
+                <div className="space-y-1">
+                    <p className="text-xs text-gray-500 uppercase tracking-wide">{category}</p>
+                    <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
+                        {name}
+                    </h3>
+                    <p className="text-sm font-semibold text-gray-900">
+                        {formatPrice(price)}
+                    </p>
                 </div>
             </Link>
 
-            {/* Wishlist Heart Button */}
+            {/* Wishlist Heart Button - Keep outside Link to prevent navigation */}
             <button
                 onClick={toggleWishlist}
                 className="absolute top-3 right-3 z-10 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm hover:bg-white transition-all duration-300"
@@ -63,16 +73,6 @@ export default function ProductCard({ id, name, price, image, images, category, 
                     className={cn("transition-colors", isLoved ? "fill-red-500 text-red-500" : "text-gray-400 group-hover:text-gray-600")}
                 />
             </button>
-
-            <div className="space-y-1">
-                <p className="text-xs text-gray-500 uppercase tracking-wide">{category}</p>
-                <h3 className="text-base font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
-                    {name}
-                </h3>
-                <p className="text-sm font-semibold text-gray-900">
-                    {formatPrice(price)}
-                </p>
-            </div>
         </div>
     );
 }

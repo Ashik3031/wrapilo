@@ -7,7 +7,7 @@ export interface IProduct extends Document {
     price: number; // Base price in primary currency (e.g., USD)
     compareAtPrice?: number;
     images: string[];
-    category: mongoose.Types.ObjectId;
+    categories: mongoose.Types.ObjectId[];
     tags: string[];
     inventory: number;
     seo: {
@@ -33,8 +33,7 @@ const ProductSchema: Schema = new Schema(
         price: { type: Number, required: true },
         compareAtPrice: { type: Number },
         images: { type: [String], required: true },
-        category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
-        subcategory: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+        categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true }],
         tags: { type: [String], default: [] },
         inventory: { type: Number, default: 0 },
         seo: {

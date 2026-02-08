@@ -236,3 +236,91 @@
   "parent": "6982c127a57e0a7ea1e7d823"
 }
 
+2026-02-05T21:36:00.261Z - POST - Incoming body
+{
+  "name": "Flowers",
+  "slug": "flowers",
+  "description": "Flowers",
+  "image": "/uploads/1770327358196-Peony-and-Lilac---same-day-delivery-fresh-cut-flowers-bouquet---Large.jpg",
+  "parent": null
+}
+
+2026-02-05T21:36:00.348Z - POST - Created category
+{
+  "name": "Flowers",
+  "slug": "flowers",
+  "image": "/uploads/1770327358196-Peony-and-Lilac---same-day-delivery-fresh-cut-flowers-bouquet---Large.jpg",
+  "description": "Flowers",
+  "parent": null,
+  "_id": "69850d4063ede2abcaed1464",
+  "createdAt": "2026-02-05T21:36:00.273Z",
+  "updatedAt": "2026-02-05T21:36:00.273Z",
+  "__v": 0
+}
+
+2026-02-05T21:37:21.222Z - POST - Incoming body
+{
+  "name": "Cakes",
+  "slug": "cakes",
+  "description": "cakes",
+  "image": "/uploads/1770327439667-blueberry-cake.jpg",
+  "parent": null
+}
+
+2026-02-05T21:37:21.334Z - POST - Created category
+{
+  "name": "Cakes",
+  "slug": "cakes",
+  "image": "/uploads/1770327439667-blueberry-cake.jpg",
+  "description": "cakes",
+  "parent": null,
+  "_id": "69850d9163ede2abcaed147e",
+  "createdAt": "2026-02-05T21:37:21.225Z",
+  "updatedAt": "2026-02-05T21:37:21.225Z",
+  "__v": 0
+}
+
+2026-02-05T21:38:09.061Z - POST - Incoming body
+{
+  "name": "Chocolates",
+  "slug": "chocolates",
+  "description": "Chocolates",
+  "image": "/uploads/1770327487665-Decadent-Chocolate-Bliss_-Rich-Chocolate-Truffles--Fresh-Raspberries.jpg",
+  "parent": null
+}
+
+2026-02-05T21:38:09.347Z - POST - Created category
+{
+  "name": "Chocolates",
+  "slug": "chocolates",
+  "image": "/uploads/1770327487665-Decadent-Chocolate-Bliss_-Rich-Chocolate-Truffles--Fresh-Raspberries.jpg",
+  "description": "Chocolates",
+  "parent": null,
+  "_id": "69850dc163ede2abcaed149a",
+  "createdAt": "2026-02-05T21:38:09.065Z",
+  "updatedAt": "2026-02-05T21:38:09.065Z",
+  "__v": 0
+}
+
+2026-02-05T21:39:26.521Z - POST - Incoming body
+{
+  "name": "Hamper",
+  "slug": "hamper",
+  "description": "hamper",
+  "image": "/uploads/1770327565004-download-(8).jpg",
+  "parent": null
+}
+
+2026-02-05T21:39:26.657Z - POST - Created category
+{
+  "name": "Hamper",
+  "slug": "hamper",
+  "image": "/uploads/1770327565004-download-(8).jpg",
+  "description": "hamper",
+  "parent": null,
+  "_id": "69850e0e63ede2abcaed14b8",
+  "createdAt": "2026-02-05T21:39:26.522Z",
+  "updatedAt": "2026-02-05T21:39:26.522Z",
+  "__v": 0
+}
+

@@ -7,6 +7,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 
+import { CartProvider } from "@/context/CartContext";
+
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 
 export const metadata: Metadata = {
@@ -24,12 +26,14 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased min-h-screen flex flex-col`}>
         <CurrencyProvider>
           <WishlistProvider>
-            <Header />
-            <main className="flex-grow pt-[64px] md:pt-[160px]">
-              {children}
-            </main>
-            <Footer />
-            <WhatsAppButton />
+            <CartProvider>
+              <Header />
+              <main className="flex-grow pt-[64px] md:pt-[160px]">
+                {children}
+              </main>
+              <Footer />
+              <WhatsAppButton />
+            </CartProvider>
           </WishlistProvider>
         </CurrencyProvider>
       </body>

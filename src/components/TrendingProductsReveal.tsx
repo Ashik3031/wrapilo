@@ -70,7 +70,7 @@ function TrendingProductsContent({ products }: { products: any[] }) {
                                     name={product.name}
                                     price={product.price}
                                     images={product.images}
-                                    category={typeof product.category === 'object' ? product.category?.name : product.category}
+                                    category={Array.isArray(product.categories) && product.categories.length > 0 ? (typeof product.categories[0] === 'object' ? product.categories[0].name : '') : ''}
                                     slug={product.slug}
                                 />
                             ))}
@@ -81,7 +81,7 @@ function TrendingProductsContent({ products }: { products: any[] }) {
                 {/* Curtain Layer - Left Panel */}
                 <motion.div
                     style={{ x: leftPanelX }}
-                    className="absolute top-0 left-0 w-1/2 h-full bg-white z-20 flex items-center justify-end pr-4 md:pr-12 border-r border-gray-100"
+                    className="absolute top-0 left-0 w-1/2 h-full bg-white z-20 flex items-center justify-end pr-4 md:pr-12 border-r border-gray-100 pointer-events-none"
                 >
                     <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter whitespace-nowrap overflow-hidden">
                         Trending
@@ -91,7 +91,7 @@ function TrendingProductsContent({ products }: { products: any[] }) {
                 {/* Curtain Layer - Right Panel */}
                 <motion.div
                     style={{ x: rightPanelX }}
-                    className="absolute top-0 right-0 w-1/2 h-full bg-white z-20 flex items-center justify-start pl-4 md:pl-12 border-l border-gray-100"
+                    className="absolute top-0 right-0 w-1/2 h-full bg-white z-20 flex items-center justify-start pl-4 md:pl-12 border-l border-gray-100 pointer-events-none"
                 >
                     <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter whitespace-nowrap overflow-hidden">
                         Products

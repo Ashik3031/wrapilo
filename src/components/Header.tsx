@@ -7,6 +7,8 @@ import CurrencySwitcher from './CurrencySwitcher';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useWishlist } from '@/context/WishlistContext';
+import { useCart } from '@/context/CartContext';
+import CartDrawer from './CartDrawer';
 
 interface Category {
     _id: string;
@@ -23,6 +25,7 @@ export default function Header() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
     const { wishlist } = useWishlist();
+    const { cartCount, setIsCartOpen } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,7 +42,10 @@ export default function Header() {
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
 
+    useEffect(() => {
         // Fetch Categories
         fetch('/api/categories')
             .then(res => res.json())
@@ -80,9 +86,7 @@ export default function Header() {
                 }
             })
             .catch(err => console.error('Failed to fetch categories', err));
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+    }, []);
 
     // Main navigation links (now mostly categories focused)
     const topLinks = [
@@ -140,7 +144,7 @@ export default function Header() {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-6 shrink-0">
-                        <Link href="/wishlist" className="flex flex-col items-center text-xs font-medium cursor-pointer hover:text-black text-gray-600 transition-colors relative group">
+                        <Link href="/wishlist" className="hidden md:flex flex-col items-center text-xs font-medium cursor-pointer hover:text-black text-gray-600 transition-colors relative group">
                             <div className="relative">
                                 <Heart size={22} className={cn("mb-0.5 transition-colors", wishlist.length > 0 && "fill-red-500 text-red-500")} />
                                 {wishlist.length > 0 && (
@@ -151,6 +155,21 @@ export default function Header() {
                             </div>
                             <span>Wishlist</span>
                         </Link>
+
+                        <button
+                            onClick={() => setIsCartOpen(true)}
+                            className="flex flex-col items-center text-xs font-medium cursor-pointer hover:text-black text-gray-600 transition-colors relative group"
+                        >
+                            <div className="relative">
+                                <ShoppingBag size={22} className="mb-0.5" />
+                                {cartCount > 0 && (
+                                    <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                                        {cartCount}
+                                    </span>
+                                )}
+                            </div>
+                            <span>Cart</span>
+                        </button>
                     </div>
                 </div>
 
@@ -252,6 +271,7 @@ export default function Header() {
                     </>
                 )}
             </AnimatePresence>
+            <CartDrawer />
         </>
     );
 }

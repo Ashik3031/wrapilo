@@ -50,11 +50,11 @@ export async function GET(request: Request) {
                 findSubcategories(categoryDoc._id);
 
                 // Query products that belong to this category or any of its subcategories
-                query.category = { $in: subcategoryIds };
+                query.categories = { $in: subcategoryIds };
             }
         }
 
-        let productsQuery = Product.find(query).populate('category');
+        let productsQuery = Product.find(query).populate('categories');
 
         if (sort === 'newest') {
             productsQuery = productsQuery.sort({ createdAt: -1 });

@@ -17,8 +17,7 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
         name: '',
         price: '',
         compareAtPrice: '',
-        category: '',
-        subcategory: '',
+        categories: [] as string[],
         description: '',
         tags: '',
         inventory: '0',
@@ -31,7 +30,6 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
-    const [availableSubcategories, setAvailableSubcategories] = useState<any[]>([]);
 
     // Reset or fill form
     useEffect(() => {
@@ -40,8 +38,9 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
                 name: initialData.name,
                 price: initialData.price?.toString() || '',
                 compareAtPrice: initialData.compareAtPrice?.toString() || '',
-                category: (initialData.category && typeof initialData.category === 'object') ? initialData.category._id : initialData.category || '',
-                subcategory: (initialData.subcategory && typeof initialData.subcategory === 'object') ? initialData.subcategory._id : initialData.subcategory || '',
+                categories: Array.isArray(initialData.categories)
+                    ? initialData.categories.map((c: any) => typeof c === 'object' ? c._id : c)
+                    : initialData.categories ? [initialData.categories] : [],
                 description: initialData.description || '',
                 tags: initialData.tags?.join(', ') || '',
                 inventory: initialData.inventory?.toString() || '0',
@@ -56,8 +55,7 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
                 name: '',
                 price: '',
                 compareAtPrice: '',
-                category: categories.length > 0 ? categories[0]._id : '',
-                subcategory: '',
+                categories: [],
                 description: '',
                 tags: '',
                 inventory: '0',
@@ -71,23 +69,16 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
         setError('');
     }, [initialData, categories, isOpen]);
 
-    // Update available subcategories when category changes
-    useEffect(() => {
-        if (formData.category) {
-            // Filter categories where parent matches selected category
-            const subcats = categories.filter(c =>
-                c.parent && (typeof c.parent === 'object' ? c.parent._id === formData.category : c.parent === formData.category)
-            );
-            setAvailableSubcategories(subcats);
-
-            // Clear subcategory if it's no longer valid
-            if (formData.subcategory && !subcats.find(s => s._id === formData.subcategory)) {
-                setFormData(prev => ({ ...prev, subcategory: '' }));
+    const handleCategoryToggle = (catId: string) => {
+        setFormData(prev => {
+            const current = [...prev.categories];
+            if (current.includes(catId)) {
+                return { ...prev, categories: current.filter(id => id !== catId) };
+            } else {
+                return { ...prev, categories: [...current, catId] };
             }
-        } else {
-            setAvailableSubcategories([]);
-        }
-    }, [formData.category, categories]);
+        });
+    };
 
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -154,6 +145,12 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
             return;
         }
 
+        if (formData.categories.length === 0) {
+            setError('Please select at least one category.');
+            setLoading(false);
+            return;
+        }
+
         const url = initialData
             ? `/api/products/${initialData._id}`
             : '/api/products';
@@ -167,12 +164,12 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
                 compareAtPrice: formData.compareAtPrice ? parseFloat(formData.compareAtPrice) : undefined,
                 inventory: parseInt(formData.inventory),
                 tags: formData.tags.split(',').map(t => t.trim()).filter(t => t !== ''),
+                categories: formData.categories,
                 seo: {
                     title: formData.seoTitle,
                     description: formData.seoDescription
                 },
                 slug: initialData?.slug || formData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-                subcategory: formData.subcategory || null
             };
 
             const res = await fetch(url, {
@@ -265,49 +262,36 @@ export default function ProductForm({ initialData, categories, isOpen, onClose, 
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                            <label className="text-sm font-medium text-gray-700">Product Name</label>
-                            <input
-                                type="text"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full px-4 py-2 border rounded-md focus:ring-1 focus:ring-black focus:border-black outline-none"
-                                required
-                            />
-                        </div>
-                        <div className="space-y-1">
-                            <label className="text-sm font-medium text-gray-700">Category</label>
-                            <select
-                                value={formData.category}
-                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                className="w-full px-4 py-2 border rounded-md focus:ring-1 focus:ring-black focus:border-black outline-none"
-                                required
-                            >
-                                <option value="" disabled>Select Category</option>
-                                {mainCategories.map(cat => (
-                                    <option key={cat._id} value={cat._id}>{cat.name}</option>
-                                ))}
-                            </select>
-                        </div>
+                    <div className="space-y-1">
+                        <label className="text-sm font-medium text-gray-700">Product Name</label>
+                        <input
+                            type="text"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className="w-full px-4 py-2 border rounded-md focus:ring-1 focus:ring-black focus:border-black outline-none"
+                            required
+                        />
                     </div>
 
-                    {/* Subcategory - Optional & Dynamic */}
-                    {availableSubcategories.length > 0 && (
-                        <div className="space-y-1">
-                            <label className="text-sm font-medium text-gray-700">Subcategory (Optional)</label>
-                            <select
-                                value={formData.subcategory}
-                                onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
-                                className="w-full px-4 py-2 border rounded-md focus:ring-1 focus:ring-black focus:border-black outline-none"
-                            >
-                                <option value="">None</option>
-                                {availableSubcategories.map(sub => (
-                                    <option key={sub._id} value={sub._id}>{sub.name}</option>
-                                ))}
-                            </select>
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Categories (select all that apply) <span className="text-red-500">*</span></label>
+                        <div className="border rounded-md p-4 max-h-48 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-2 bg-gray-50">
+                            {categories.map((cat) => (
+                                <label key={cat._id} className="flex items-center gap-3 p-2 hover:bg-white rounded-lg cursor-pointer transition-colors border border-transparent hover:border-gray-200">
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.categories.includes(cat._id)}
+                                        onChange={() => handleCategoryToggle(cat._id)}
+                                        className="w-4 h-4 rounded text-black focus:ring-black"
+                                    />
+                                    <span className={`text-sm ${cat.parent ? 'text-gray-500 pl-3 border-l' : 'font-bold text-gray-900 uppercase text-[11px]'}`}>
+                                        {cat.name}
+                                    </span>
+                                </label>
+                            ))}
                         </div>
-                    )}
+                        {categories.length === 0 && <p className="text-xs text-amber-600">No categories found. Create some first!</p>}
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="space-y-1">

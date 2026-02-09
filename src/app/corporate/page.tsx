@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Heart, MessageCircle, ArrowLeft } from 'lucide-react';
 
 export default function CorporateGiftsPage() {
-    const phoneNumber = "971544692469";
+    const phoneNumber = "971544057109";
     const message = encodeURIComponent("Hi, I'm interested in Corporate Gifting with Wrapilo.");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 

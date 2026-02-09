@@ -115,7 +115,7 @@ export default function Header() {
                                     {link.name}
                                 </Link>
                             ))}
-                            <span className="flex items-center gap-1"><Phone size={12} className="fill-current" />Call Us: +971 54 469 2469</span>
+                            <span className="flex items-center gap-1"><Phone size={12} className="fill-current" />Call Us: +971 54 405 7109</span>
                         </div>
                     </div>
                 </div>

@@ -64,7 +64,7 @@ Currency: ${currency}
 Can you please provide more details?`;
 
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/971544692469?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/971544057109?text=${encodedMessage}`, '_blank');
     };
 
     if (loading) {

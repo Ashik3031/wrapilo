@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ShoppingBag, MessageCircle, ArrowLeft } from 'lucide-react';
 
 export default function SellWithUsPage() {
-    const phoneNumber = "971544692469";
+    const phoneNumber = "971544057109";
     const message = encodeURIComponent("Hi, I'm interested in selling my products on Wrapilo.");
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 

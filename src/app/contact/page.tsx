@@ -26,7 +26,7 @@ export default function ContactPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <a
-                        href="https://wa.me/971544692469?text=Hi%2C%20I'm%20interested%20in%20placing%20an%20order%20with%20Wrapilo."
+                        href="https://wa.me/971544057109?text=Hi%2C%20I'm%20interested%20in%20placing%20an%20order%20with%20Wrapilo."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-full font-bold hover:bg-[#128C7E] transition-all"
@@ -35,11 +35,11 @@ export default function ContactPage() {
                         WhatsApp Chat
                     </a>
                     <a
-                        href="tel:+971544692469"
+                        href="tel:+971544057109"
                         className="flex items-center justify-center gap-3 px-8 py-4 rounded-full border border-gray-200 font-bold hover:bg-gray-50 transition-all text-gray-800"
                     >
                         <Phone size={20} />
-                        +971 54 469 2469
+                        +971 54 405 7109
                     </a>
                 </div>
             </div>

@@ -45,9 +45,9 @@ export default function Footer() {
                                 <span className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center text-[10px] text-white shrink-0 mt-0.5">W</span>
                                 <div>
                                     <span className="block text-xs uppercase text-gray-400 font-bold mb-1">Orders & WhatsApp:</span>
-                                    <a href="tel:+971544692469" className="hover:text-black block transition-all">+971 54 469 2469</a>
+                                    <a href="tel:+971544057109" className="hover:text-black block transition-all">+971 54 405 7109</a>
                                     <a
-                                        href="https://wa.me/971544692469?text=Hi%2C%20I'm%20interested%20in%20placing%20an%20order%20with%20Wrapilo."
+                                        href="https://wa.me/971544057109?text=Hi%2C%20I'm%20interested%20in%20placing%20an%20order%20with%20Wrapilo."
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-[#25D366] hover:underline transition-all block text-xs mt-1"

@@ -9,6 +9,7 @@ import CategoryForm from '@/components/admin/CategoryForm';
 import CategoryProductManager from '@/components/admin/CategoryProductManager';
 import BulkUpload from '@/components/admin/BulkUpload';
 import HomeSectionForm from '@/components/admin/HomeSectionForm';
+import HeroForm from '@/components/admin/HeroForm';
 
 interface Product {
     _id: string;
@@ -61,12 +62,13 @@ interface Order {
 export default function AdminDashboard() {
     const router = useRouter();
     const { formatPrice } = useCurrency();
-    const [activeTab, setActiveTab] = useState<'products' | 'categories' | 'home-layout' | 'orders'>('products');
+    const [activeTab, setActiveTab] = useState<'products' | 'categories' | 'home-layout' | 'orders' | 'hero'>('products');
 
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [homeSections, setHomeSections] = useState<HomeSection[]>([]);
     const [orders, setOrders] = useState<Order[]>([]); // New Order State
+    const [heroConfig, setHeroConfig] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     // Modal State
@@ -74,6 +76,7 @@ export default function AdminDashboard() {
     const [isCategoryFormOpen, setCategoryFormOpen] = useState(false);
     const [isCategoryProductManagerOpen, setCategoryProductManagerOpen] = useState(false);
     const [isHomeSectionFormOpen, setHomeSectionFormOpen] = useState(false);
+    const [isHeroFormOpen, setHeroFormOpen] = useState(false);
     const [isBulkUploadOpen, setBulkUploadOpen] = useState(false);
     const [editingItem, setEditingItem] = useState<any>(null);
 
@@ -123,6 +126,10 @@ export default function AdminDashboard() {
                 const res = await fetch('/api/orders', { cache: 'no-store' });
                 const data = await res.json();
                 if (data.success) setOrders(data.data);
+            } else if (activeTab === 'hero') {
+                const res = await fetch('/api/hero', { cache: 'no-store' });
+                const data = await res.json();
+                if (data.success) setHeroConfig(data.data);
             }
         } catch (error) {
             console.error('Failed to fetch data', error);
@@ -141,6 +148,11 @@ export default function AdminDashboard() {
         if (activeTab === 'products') setProductFormOpen(true);
         else if (activeTab === 'categories') setCategoryFormOpen(true);
         else setHomeSectionFormOpen(true);
+    };
+
+    const handleEditHero = () => {
+        setEditingItem(heroConfig);
+        setHeroFormOpen(true);
     };
 
     const handleEdit = (item: any) => {
@@ -237,7 +249,13 @@ export default function AdminDashboard() {
                             onClick={() => setActiveTab('orders')}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${activeTab === 'orders' ? 'bg-black text-white shadow-lg shadow-black/10' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'}`}
                         >
-                            <Package size={18} /> Orders {/* Reusing Package icon or maybe ListOrdered if available */}
+                            <Package size={18} /> Orders
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('hero')}
+                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${activeTab === 'hero' ? 'bg-black text-white shadow-lg shadow-black/10' : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'}`}
+                        >
+                            <Layout size={18} /> Hero Settings
                         </button>
                     </nav>
 
@@ -254,7 +272,8 @@ export default function AdminDashboard() {
                                 {activeTab === 'products' ? 'Product Inventory' :
                                     activeTab === 'categories' ? 'Gifting Categories' :
                                         activeTab === 'home-layout' ? 'Home Page Layout' :
-                                            'Order Management'}
+                                            activeTab === 'hero' ? 'Hero Configuration' :
+                                                'Order Management'}
                             </h2>
                             <p className="text-gray-500 text-sm mt-1">Manage and organize your store content</p>
                         </div>
@@ -267,12 +286,20 @@ export default function AdminDashboard() {
                                     <Upload size={18} /> Bulk Upload
                                 </button>
                             )}
-                            {activeTab !== 'orders' && (
+                            {activeTab !== 'orders' && activeTab !== 'hero' && (
                                 <button
                                     onClick={handleAddNew}
                                     className="bg-black text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-gray-800 transition-all shadow-lg shadow-black/10"
                                 >
                                     <Plus size={18} /> {activeTab === 'home-layout' ? 'Add Section' : 'Add New'}
+                                </button>
+                            )}
+                            {activeTab === 'hero' && (
+                                <button
+                                    onClick={handleEditHero}
+                                    className="bg-black text-white px-5 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-gray-800 transition-all shadow-lg shadow-black/10"
+                                >
+                                    <Edit size={18} /> Edit Hero
                                 </button>
                             )}
                         </div>
@@ -419,7 +446,7 @@ export default function AdminDashboard() {
                                 </tbody>
                             </table>
                         </div>
-                    ) : (
+                    ) : activeTab === 'orders' ? (
                         // ORDERS TABLE
                         <div className="bg-white rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/50 overflow-hidden">
                             <table className="w-full text-left text-sm">
@@ -486,7 +513,53 @@ export default function AdminDashboard() {
                                 </tbody>
                             </table>
                         </div>
-                    )}
+                    ) : activeTab === 'hero' ? (
+                        // HERO CONFIGURATION VIEW
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-xl shadow-gray-200/50 p-8">
+                            {heroConfig ? (
+                                <div className="space-y-6">
+                                    <div className="flex gap-8">
+                                        <div className="w-1/3 space-y-4">
+                                            <div>
+                                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1">Tagline</h3>
+                                                <p className="font-medium text-gray-900">{heroConfig.tagline}</p>
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1">Title</h3>
+                                                <div className="font-medium text-gray-900" dangerouslySetInnerHTML={{ __html: heroConfig.title }} />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1">Description</h3>
+                                                <p className="text-sm text-gray-700">{heroConfig.description}</p>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1">Primary Button</h3>
+                                                    <p className="text-sm font-bold">{heroConfig.primaryButtonText}</p>
+                                                    <p className="text-xs text-gray-500 font-mono">{heroConfig.primaryButtonLink}</p>
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-1">Secondary Button</h3>
+                                                    <p className="text-sm font-bold">{heroConfig.secondaryButtonText}</p>
+                                                    <p className="text-xs text-gray-500 font-mono">{heroConfig.secondaryButtonLink}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="w-2/3">
+                                            <h3 className="text-xs font-black text-gray-500 uppercase tracking-wider mb-2">Background Image</h3>
+                                            <div className="aspect-video rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
+                                                <img src={heroConfig.backgroundImage} alt="Hero Background" className="w-full h-full object-cover" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="text-center py-10">
+                                    <p className="text-gray-500">No hero configuration found. Click "Edit Hero" to initialize.</p>
+                                </div>
+                            )}
+                        </div>
+                    ) : null}
 
                     {/* Modals ... */}
                     <ProductForm
@@ -518,6 +591,12 @@ export default function AdminDashboard() {
                     <BulkUpload
                         isOpen={isBulkUploadOpen}
                         onClose={() => setBulkUploadOpen(false)}
+                        onSuccess={fetchData}
+                    />
+                    <HeroForm
+                        isOpen={isHeroFormOpen}
+                        onClose={() => setHeroFormOpen(false)}
+                        initialData={editingItem}
                         onSuccess={fetchData}
                     />
 
